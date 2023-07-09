@@ -5,6 +5,7 @@ const app = express();
 
 // Import user routes
 const userRoutes = require("./routes/userRoutes");
+const noteRoutes =require("./routes/noteRoutes");
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 
 // Use user routes
 app.use("/users", userRoutes);
+app.use("/notes",noteRoutes); 
 
 const url = "mongodb+srv://princevarshney072:users@cluster0.ota0ny1.mongodb.net/";
 // Connect to the MongoDB database

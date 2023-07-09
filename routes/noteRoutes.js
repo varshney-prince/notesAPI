@@ -1,16 +1,14 @@
-// Import required modules
-const express = require('express');
-const userRouter = express.Router();
+const express=require('express');
+const auth=require('../middleware/auth');
+const noteRouter=express.Router();
+const{getNote,createNote,deleteNote,updateNote}=require('../controllers/noteController');
 
-// Signup endpoint
-userRouter.post("/signup", (req, res) => {
-  console.log("signup successful");
-  res.send("Signup");
-});
+noteRouter.get("/",auth,getNote);
 
-// Signin endpoint
-userRouter.post("/signin", (req, res) => {
-  res.send("Signin");
-});
+noteRouter.post("/",auth,createNote);
 
-module.exports = userRouter;
+noteRouter.delete("/:id",auth,deleteNote);
+
+noteRouter.put("/:id",auth,updateNote);
+
+module.exports=noteRouter;
