@@ -1,7 +1,8 @@
-const jwt=require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const SECRET_KEY="NOTESAPI";
 
 const auth=(req, res, next) => {
+    
     try {
         let token = req.headers.authorization;
         if (token) {
@@ -20,3 +21,5 @@ const auth=(req, res, next) => {
         res.status(401).json({message: "Unauthorized user"});
     }
 }
+
+module.exports = auth;
