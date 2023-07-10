@@ -30,11 +30,12 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
+   
 
     // Check if the user exists
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email:email });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -47,9 +48,10 @@ const signin = async (req, res) => {
 
     // User is authenticated
     // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ email:user.email,id:user._id}, SECRET_KEY, { expiresIn: '1h' });
 
-    res.status(200).json({ message: 'Signin successful', token });
+    res.status(200).json({ user:user,token: token });
+
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Server error' });

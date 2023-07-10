@@ -61,7 +61,7 @@ const deleteNote = async(req,res)=>{
 
 const getNote = async(req,res)=>{
     try {
-        const notes = await noteModel.find({userId: req.user.id});
+        const notes = await noteModel.find({userId: req.userId});
         res.status(200).json(notes);
 
     } catch (error) {

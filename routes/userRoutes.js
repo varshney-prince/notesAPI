@@ -7,6 +7,6 @@ const{signup,signin}=require("../controllers/userController");
 userRouter.post("/signup",signup);
 
 // Signin endpoint
-userRouter.post("signin",signin);
+userRouter.post("/signin",signin);
 
 module.exports = userRouter;
