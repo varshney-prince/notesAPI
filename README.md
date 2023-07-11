@@ -16,18 +16,18 @@ Simple note taking api whith authentication
 
 ## notes endpoints
 
-### create notes
+### Create notes
 * endpoint -> `/notes/` using `POST`
 * payload -> {"title":"weather forcast" , "description":"first rain"}
 * add token for authentication in header created during signup
 
-### get notes
+### Get notes
 * endpoint -> `/notes/` using `GET`
 * add token for authentication in header created during signup
 
-### update notes
+### Update notes
 * endpoint -> `/notes/:id` using `PUT`
 * payload -> {"title":"weather forcast" , "description":"first rain"}
 
-### update notes
+### Delete notes
 * endpoint -> `/notes/:id` using `DELETE`
