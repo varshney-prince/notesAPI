@@ -1,7 +1,7 @@
 const userModel = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = "NOTESAPI";
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const signup = async (req, res) => {
   try {
@@ -48,7 +48,7 @@ const signin = async (req, res) => {
 
     // User is authenticated
     // Generate a JWT token
-    const token = jwt.sign({ email:user.email,id:user._id}, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ email:user.email,id:user._id}, SECRET_KEY);
 
     res.status(200).json({ user:user,token: token });
 
@@ -57,5 +57,6 @@ const signin = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 module.exports = { signin, signup };

@@ -1,12 +1,17 @@
 // Import required modules
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv=require("dotenv");
+const cors = require("cors");
 const app = express();
 
+dotenv.config();
+app.use(cors());
 // Import user routes
 const userRoutes = require("./routes/userRoutes");
 const noteRoutes =require("./routes/noteRoutes");
 app.use(express.json());
+
 
 app.get("/", (req, res) => {
   res.send("Welcome");
@@ -16,7 +21,8 @@ app.get("/", (req, res) => {
 app.use("/users", userRoutes);
 app.use("/notes",noteRoutes); 
 
-const url = "mongodb+srv://princevarshney072:users@cluster0.ota0ny1.mongodb.net/";
+const url = process.env.MONGO_URL;
+const PORT=process.env.PORT || 5000;
 // Connect to the MongoDB database
 mongoose
   .connect(url, {
@@ -25,9 +31,9 @@ mongoose
   })
   .then(() => {
     // Once connected, start the server
-    const port = 5000;
-    app.listen(port, () => {
-      console.log(`Server started on port ${port}`);
+    
+    app.listen(PORT, () => {
+      console.log(`Server started on port ${PORT}`);
     });
   })
   .catch((error) => {

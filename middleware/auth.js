@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY="NOTESAPI";
+const SECRET_KEY=process.env.SECRET_KEY;
 
 const auth=(req, res, next) => {
     
@@ -11,7 +11,7 @@ const auth=(req, res, next) => {
             req.userId=user.id;
         }
         else{
-            res.status(401).json({message: "Unauthorized user"});
+            return res.status(401).json({message: "Unauthorized user"});
         }
 
         next();
